@@ -18,6 +18,7 @@ const formChangeHandler = () => {
 const formSubmitHandler = (evt) => {
   // const isValid = validate();
   evt.preventDefault();
+  form.submit();
   // if (isValid) {
   //   console.log('+++ valid');
   // } else {
@@ -37,9 +38,9 @@ const onModalEscKeydown = (evt) => {
   }
 };
 
-form.method = FormOptions.method;
-form.enctype = FormOptions.enctype;
-form.action = FormOptions.action;
+form.method = FormOptions.METHOD;
+form.enctype = FormOptions.ENCTYPE;
+form.action = FormOptions.ACTION;
 
 form.addEventListener('change', formChangeHandler);
 form.addEventListener('submit', formSubmitHandler);
