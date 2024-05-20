@@ -1,7 +1,23 @@
-import { generatePictures } from './data.js';
+import {
+  setOnFilterChangeCallback,
+  filterPictures,
+  showFilters
+} from './filter.js';
 import { renderThumbnails } from './gallery.js';
+import { showDownloadErrorMessage } from './message.js';
+import { downloadData } from './server.js';
+import { debounce } from './util.js';
 import './upload-form.js';
 
-const allPictures = generatePictures();
-
-renderThumbnails(allPictures);
+downloadData ((pictures) => {
+  showFilters();
+  renderThumbnails(pictures);
+  setOnFilterChangeCallback(
+    debounce(
+      () => renderThumbnails(filterPictures(pictures))
+    )
+  );
+},
+() => {
+  showDownloadErrorMessage();
+});
